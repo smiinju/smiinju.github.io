@@ -18,7 +18,7 @@ html.dark .paper-figure{background:transparent;border-color:#2a343d}
 html.dark .note{color:#d4a017}
 html.dark .block h2{color:#bccdd8}
 html.dark #progressBar{background:var(--teal)}
-@media(max-width:640px){html.dark header{background:rgba(20,26,32,.3) !important}}
+@media(max-width:640px){html.dark header{background:rgba(20,26,32,.3) !important}.pubs li.in-focus h3 a{text-decoration:underline}}
 </style></head><body><header><nav><a href="#about" class="nav-active">about</a><a href="#publications">publications</a><span id="themeToggle" class="theme-toggle" role="button" tabindex="0" aria-label="Toggle dark mode" title="Toggle dark mode"><img id="themeIcon" src="sun-icon.png" alt=""></span></nav></header><div id="progressBar"></div><div class="container">
 <section id="about" class="profile"><img src="minju-song.jpg" alt="Minju Song" class="zoomable"><div><h1>Minju Song</h1><p class="subtitle">M.S. Student at Korea University</p><div class="socials"><a href="mailto:minjusong@korea.ac.kr" aria-label="Email" title="Copy email" id="emailLink">✉<span class="copied-tip" id="copiedTip">Copied!</span></a><a href="https://www.linkedin.com/in/minju-song-901950301" aria-label="LinkedIn" title="LinkedIn" target="_blank" rel="noopener"><svg class="linkedin-icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.03-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V8.98h3.42v1.57h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.29zM5.32 7.41a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.1 20.45H3.54V8.98H7.1v11.47zM22.23 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.46c.98 0 1.77-.77 1.77-1.72V1.72C24 .77 23.21 0 22.23 0z"/></svg></a><a href="CV_Minju_Song.pdf" aria-label="CV" title="CV" target="_blank" rel="noopener">CV</a></div></div></section>
 <article class="content-update"><div class="bio"><p>Hi! I am an M.S. student at the <a href="https://dmis.korea.ac.kr/" target="_blank" rel="noopener">Data Mining &amp; Information Systems Lab</a> at Korea University, advised by Prof. <a href="https://dmis.korea.ac.kr/jaewoo-kang-p-i" target="_blank" rel="noopener">Jaewoo Kang</a>.</p><p>My research focuses on understanding and improving the reasoning abilities of large language models, with interests spanning model interpretability, AI agents, and real-world applications.</p></div>
@@ -88,6 +88,12 @@ var fadeObserver = new IntersectionObserver(function(entries){
   });
 }, {threshold:0.12});
 document.querySelectorAll('.block').forEach(function(el){ fadeObserver.observe(el); });
+var centerObserver = new IntersectionObserver(function(entries){
+  entries.forEach(function(entry){
+    entry.target.classList.toggle('in-focus', entry.isIntersecting);
+  });
+}, {rootMargin: '-45% 0px -45% 0px', threshold: 0});
+document.querySelectorAll('.pubs li').forEach(function(el){ centerObserver.observe(el); });
 function updateProgress(){
   var h = document.documentElement;
   var scrollable = h.scrollHeight - h.clientHeight;
