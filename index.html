@@ -36,7 +36,13 @@ document.getElementById('emailLink').addEventListener('click', function(e){
   e.preventDefault();
   var email = 'minjusong@korea.ac.kr';
   var tip = document.getElementById('copiedTip');
-  function showTip(){ tip.classList.add('show'); setTimeout(function(){ tip.classList.remove('show'); }, 1500); }
+  var extras = ['🪄', '🙌', '🥳'];
+  function showTip(){
+    var pick = extras[Math.floor(Math.random() * extras.length)];
+    tip.innerHTML = 'Copied! ' + pick;
+    tip.classList.add('show');
+    setTimeout(function(){ tip.classList.remove('show'); }, 1500);
+  }
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(email).then(showTip);
   } else {
